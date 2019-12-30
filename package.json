@@ -11,7 +11,8 @@
     "access": "public"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "create": "sc-landing-cli create ../landings/enel/ore-free -f enel/ore-free",
+    "dev" : "sc-landing-cli dev -o ./landing/dist"
   },
   "repository": {
     "type": "git",
@@ -24,9 +25,11 @@
   },
   "homepage": "https://github.com/FedericoMameliPrjs/sc-landing-cli#readme",
   "dependencies": {
-    "arg": "^4.1.2",
     "chalk": "^3.0.0",
     "esm": "^3.2.25",
-    "inquirer": "^7.0.1"
+    "inquirer": "^7.0.1",
+    "lodash": "^4.17.15",
+    "minimist": "^1.2.0",
+    "minimist-options": "^4.0.2"
   }
 }
