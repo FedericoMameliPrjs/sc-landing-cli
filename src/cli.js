@@ -1,6 +1,10 @@
 import path from 'path';
 import minimist from 'minimist';
 import minimistOptions from 'minimist-options';
+import {
+  create
+  } from './index.js';
+import {logError} from "./utils/console-log";
 
 function parseArgs(rawArgs) {
   /*
@@ -64,7 +68,18 @@ function parseArgs(rawArgs) {
 }
 
 export function cli (args) {
-  const options = parseArgs(args);
-  console.log(options);
+  const {cmd, options} = parseArgs(args);
+
+  switch (cmd.key) {
+    case 'create':
+      create({
+        projectPath: cmd.value,
+        ...options
+      })
+        .catch(err => {
+          logError(err);
+        });
+      break;
+  }
 }
 

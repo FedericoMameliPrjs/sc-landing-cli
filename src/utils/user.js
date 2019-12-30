@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
-const userData = require('../data/user');
+const userData = require('../../data/user');
 const log = require('./console-log');
 
 exports.set = async function (username, password) {
