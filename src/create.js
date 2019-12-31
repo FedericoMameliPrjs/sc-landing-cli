@@ -24,20 +24,20 @@ async function create(options) {
   await handleProjectDir(options.projectPath);
 
   //2. clone git repo
-  spinner.start(chalk.cyan('Downloading...\n'));
+  // spinner.start(chalk.cyan('Downloading...\n'));
 
   await git.clone(gitProjectUrl, options.projectPath, {
     branch: options.from || ''
   }).catch(err => logError(err));
 
   //3. run npm install to install dependencies
-  spinner.start(chalk.cyan('Installing...\n'));
+  // spinner.start(chalk.cyan('Installing...\n'));
   const r = await execa('npm', ['install'], {cwd: options.projectPath});
 
   if(r.failed)
     logError(r.stdout);
 
-  spinner.clear();
+  // spinner.clear();
   log('project created!', 'success');
   process.exit();
 }

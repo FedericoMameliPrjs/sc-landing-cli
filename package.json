@@ -11,7 +11,7 @@
     "access": "public"
   },
   "scripts": {
-    "create": "sc-landing-cli create ../landings-test/enel",
+    "create": "sc-landing-cli create ../landings-test/enel-free -f enel/ore-free",
     "dev": "sc-landing-cli dev -o ./landing/dist"
   },
   "repository": {
@@ -29,10 +29,11 @@
     "download-git-repo": "^3.0.2",
     "esm": "^3.2.25",
     "execa": "^4.0.0",
-    "inquirer": "^7.0.1",
+    "live-server": "^1.2.1",
     "lodash": "^4.17.15",
     "minimist": "^1.2.0",
     "minimist-options": "^4.0.2",
+    "node-sass": "^4.13.0",
     "ora": "^4.0.3",
     "prompts": "^2.3.0",
     "rimraf": "^3.0.0"

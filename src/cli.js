@@ -2,7 +2,8 @@ import path from 'path';
 import minimist from 'minimist';
 import minimistOptions from 'minimist-options';
 import {
-  create
+  create,
+  runDev
   } from './index.js';
 import {logError} from "./utils/console-log";
 
@@ -23,17 +24,27 @@ function parseArgs(rawArgs) {
   const argsOptions = minimistOptions({
     from: {
       type: 'string',
-      alias: 'f'
+      alias: 'f',
+      default: ''
     },
     name: {
       type: 'string',
       alias: 'n',
       default: defaultLandingName
     },
-    output: {
+    cssEntry:{
       type: 'string',
-      alias: 'o',
+      alias: 'ce',
+      default: path.resolve(process.cwd(), './src/scss/main.scss')
+    },
+    cssOutput: {
+      type: 'string',
+      alias: 'co',
       default: path.resolve(process.cwd(), './dist')
+    },
+    thirdLevel:{
+      type: 'string',
+      default: ''
     }
   });
 
@@ -61,8 +72,10 @@ function parseArgs(rawArgs) {
     cmd,
     options:{
       name: args.name,
-      from: args.from || '',
-      output: args.output
+      from: args.from,
+      cssEntry: args.cssEntry,
+      cssOutput: args.cssOutput,
+      thirdLevel: args.thirdLevel
     }
   };
 }
@@ -79,6 +92,9 @@ export function cli (args) {
         .catch(err => {
           logError(err);
         });
+      break;
+    case 'dev':
+      runDev(options);
       break;
   }
 }

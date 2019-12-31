@@ -8,7 +8,7 @@ const urls = {
   //   });
   // },
   create: 'http://git.octopusmanagement.it:7990/scm/lpd/landing-page-starter.git',
-  // clone: 'http://federico.mameli@git.octopusmanagement.it:7990/scm/lpd/landing-pages.git'
+  // clone: 'http//federico.mameli@git.octopusmanagement.it:7990/scm/lpd/landing-pages.git'
   get clone(){
     return template('http://<%= username %>@git.octopusmanagement.it:7990/scm/lpd/landing-pages.git')({
       username: gitUser.user
