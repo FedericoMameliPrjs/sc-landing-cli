@@ -29,6 +29,7 @@
     "download-git-repo": "^3.0.2",
     "esm": "^3.2.25",
     "execa": "^4.0.0",
+    "imagemin-jpegtran": "^6.0.0",
     "live-server": "^1.2.1",
     "lodash": "^4.17.15",
     "minimist": "^1.2.0",
@@ -37,5 +38,9 @@
     "ora": "^4.0.3",
     "prompts": "^2.3.0",
     "rimraf": "^3.0.0"
+  },
+  "devDependencies": {
+    "imagemin": "^7.0.1",
+    "imagemin-pngquant": "^8.0.0"
   }
 }

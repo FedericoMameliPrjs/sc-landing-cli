@@ -9,6 +9,7 @@ import execa from "execa";
 
 import {log, logError} from './utils/console-log';
 import repoUrls from './repo-urls';
+import {createDirIfNotExits} from './utils/path';
 import * as git from './utils/git';
 
 
@@ -21,17 +22,18 @@ async function create(options) {
 
   //1. if folder not exists, create it,
   //   if exists and it is not empty, ask if override it, if so, override it.
-  await handleProjectDir(options.projectPath);
+  await handleProjectDir(options.projectPath, {loader: spinner});
 
   //2. clone git repo
-  // spinner.start(chalk.cyan('Downloading...\n'));
+  spinner.start(chalk.cyan('Downloading...\n'));
 
   await git.clone(gitProjectUrl, options.projectPath, {
     branch: options.from || ''
   }).catch(err => logError(err));
 
   //3. run npm install to install dependencies
-  // spinner.start(chalk.cyan('Installing...\n'));
+  spinner.clear();
+  spinner.start(chalk.cyan('Installing...\n'));
   const r = await execa('npm', ['install'], {cwd: options.projectPath});
 
   if(r.failed)
@@ -42,15 +44,15 @@ async function create(options) {
   process.exit();
 }
 
-function handleProjectDir(projectPath){
+function handleProjectDir(projectPath, {loader}){
   return new Promise(async (resolve, reject) => {
 
     //1. check if the folder exists, if not create it
     try{
-      await fs.promises.access(projectPath);
+      await createDirIfNotExits(projectPath);
     }
     catch (err) {
-      fs.mkdirSync(projectPath);
+      logError(err);
     }
 
     //2. if folder exists and is not empty, prompt if user wants to override it.
@@ -58,6 +60,8 @@ function handleProjectDir(projectPath){
     const dirContent = fs.readdirSync(projectPath);
 
     if(dirContent.length) {
+      if(loader) loader.clear();
+
       const { answer } = await prompts({
         type: 'text',
         name: 'answer',

@@ -20,6 +20,7 @@ function parseArgs(rawArgs) {
   *   [--output/-o, ]
   * */
   const defaultLandingName = process.cwd().split(/\\/).reverse()[0];
+  const defaultDistOutputFolder = path.resolve(process.cwd(), './dist');
 
   const argsOptions = minimistOptions({
     from: {
@@ -40,7 +41,16 @@ function parseArgs(rawArgs) {
     cssOutput: {
       type: 'string',
       alias: 'co',
-      default: path.resolve(process.cwd(), './dist')
+      default: defaultDistOutputFolder
+    },
+    imagesEntry:{
+      type: 'string',
+      // default: path.resolve(process.cwd(), './src/images')
+      default: './src/images'
+    },
+    imagesOutput:{
+      type: 'string',
+      default: defaultDistOutputFolder
     },
     thirdLevel:{
       type: 'string',
@@ -75,7 +85,11 @@ function parseArgs(rawArgs) {
       from: args.from,
       cssEntry: args.cssEntry,
       cssOutput: args.cssOutput,
-      thirdLevel: args.thirdLevel
+      thirdLevel: args.thirdLevel,
+      images: {
+        entryFolder: args.imagesEntry,
+        outputFolder: args.imagesOutput
+      }
     }
   };
 }
